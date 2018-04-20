@@ -61,7 +61,16 @@ namespace HW9
 
         public static void Ex11_9Test()
         {
+            Console.Clear();
 
+            string[] arguments = new string[1];
+
+            Console.Write("Enter an index number: ");
+            arguments[0] = Console.ReadLine();
+
+            TryException test = new TryException();
+            test.TryExceptionTest(arguments);
+            ReturnToMainMenu();
         }
 
         public static void Ex11_17Test()

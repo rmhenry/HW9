@@ -6,7 +6,7 @@
 
 using System;
 public class TryException{
-  public static void Main(String[] args) 
+  public void TryExceptionTest(String[] args) 
   {
     int value;
     try 
@@ -16,10 +16,18 @@ public class TryException{
       value = anArray[index];
       Console.WriteLine
          ("Execution does not get here if index is bad");
-    }catch (IndexOutOfRangeException e) 
+    }
+
+    catch (IndexOutOfRangeException e) 
     {
-      Console.WriteLine("Stick with 0, 1, or 2");
+        do
+        {
+            Console.WriteLine("Stick with 0, 1, or 2");
+            Console.Write("Enter an index number: ");
+            value = int.Parse(Console.ReadLine());
+        } while (value < 0 || value > 2);
     }
     Console.WriteLine("This is the end of the program");
+    Console.ReadLine();
   }
 }
