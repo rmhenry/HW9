@@ -51,7 +51,12 @@ namespace HW9
 
         public static void DebugTest()
         {
+            Console.Clear();
 
+            string[] arguments = new string[] {"testfile.txt", "3"};
+            ReadFile test = new ReadFile();
+            test.ReadFileTest(arguments);
+            ReturnToMainMenu();
         }
 
         public static void Ex11_9Test()
@@ -67,6 +72,14 @@ namespace HW9
         public static void Ex11_19Test()
         {
 
+        }
+
+        public static void ReturnToMainMenu()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Press Enter to return to the Main Menu.");
+            Console.ReadLine();
+            MainMenu();
         }
     }
 }
