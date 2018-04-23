@@ -75,7 +75,20 @@ namespace HW9
 
         public static void Ex11_17Test()
         {
+            Console.Clear();
 
+            Console.WriteLine("Enter a file name and a text string to search for.");
+            Console.WriteLine("Type the file name first, add a space, then type the text string.");
+            Console.Write("Sample input: ");
+
+            string[] arguments = Console.ReadLine().Split(new char[] { ' ' });
+            string fileName = arguments[0];
+            string searchText = arguments[1];
+
+            Ex11_17 test = new Ex11_17();
+            test.SearchForText(fileName, searchText);
+
+            ReturnToMainMenu();
         }
 
         public static void Ex11_19Test()
