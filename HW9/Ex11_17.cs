@@ -23,10 +23,15 @@ namespace HW9
                 currentLine++;
             }
 
+            f.Close();
+
             Console.WriteLine();
             Console.WriteLine($"File name = {fileName}");
             Console.WriteLine($"Searched for text = '{searchText}'");
-            Console.WriteLine($"'{searchText}' found in line {foundOnLine}");
+            if (foundOnLine > 0)
+                Console.WriteLine($"'{searchText}' found in line {foundOnLine}");
+            else
+                Console.WriteLine($"'{searchText}' was not found.");
         }
     }
 }

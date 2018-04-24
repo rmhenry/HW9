@@ -93,7 +93,11 @@ namespace HW9
 
         public static void Ex11_19Test()
         {
+            string inventoryFile = "inventory.txt";
+            string updateFile = "update.txt";
 
+            Ex11_19 test = new Ex11_19();
+            test.UpdateInventory(inventoryFile, updateFile);
         }
 
         public static void ReturnToMainMenu()
