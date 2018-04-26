@@ -14,17 +14,34 @@ namespace HW9
             string line;
             int currentLine = 1;
             int foundOnLine = 0;
-            StreamReader f = new StreamReader(fileName);
 
-            while ((line = f.ReadLine()) != null)
+            try
             {
-                if (line.Contains(searchText))
-                    foundOnLine = currentLine;
-                currentLine++;
+                StreamReader f = new StreamReader(fileName);
+
+                while ((line = f.ReadLine()) != null)
+                {
+                    if (line.Contains(searchText))
+                        foundOnLine = currentLine;
+                    currentLine++;
+                }
+
+                f.Close();
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("An error occurred while attempting to process the specified file.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
 
-            f.Close();
+            DisplaySearchResults(fileName, searchText, foundOnLine);
+        }
 
+        private static void DisplaySearchResults(string fileName, string searchText, int foundOnLine)
+        {
             Console.WriteLine();
             Console.WriteLine($"File name = {fileName}");
             Console.WriteLine($"Searched for text = '{searchText}'");

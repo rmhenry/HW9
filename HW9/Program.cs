@@ -98,6 +98,8 @@ namespace HW9
 
             Ex11_19 test = new Ex11_19();
             test.UpdateInventory(inventoryFile, updateFile);
+
+            ReturnToMainMenu();
         }
 
         public static void ReturnToMainMenu()

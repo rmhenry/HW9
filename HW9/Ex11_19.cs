@@ -11,65 +11,90 @@ namespace HW9
     {
         public void UpdateInventory(string inventoryFileName, string updateFileName)
         {
+            Console.Clear();
+
             string[,] updateFileArray = FileToArray(updateFileName);
             string[,] inventoryFileArray = FileToArray(inventoryFileName);
-            //DisplayArrayContents(inventoryFileArray);
             UpdateInventoryArray(inventoryFileArray, updateFileArray);
-            //DisplayArrayContents(inventoryFileArray);
 
             string newFileName = NewFile(inventoryFileArray);
+
             DisplayFileContents("Initial inventory file", inventoryFileName);
             DisplayFileContents("Update to inventory file", updateFileName);
             DisplayFileContents("Updated inventory file", newFileName);
-
-            Console.ReadLine();
         }
 
         private static string[,] FileToArray(string fileName)
         {
             int lineCount = CountFileLines(fileName);
-            string[,] array = new string[lineCount, 3];
-            StreamReader fileReader = new StreamReader(fileName);
-            string line;
             int i = 0;
+            string[,] array = new string[lineCount, 3];
+            string line;
 
-            while ((line = fileReader.ReadLine()) != null)
+            try
             {
-                string[] currentLine = line.Split('|');
-                if (currentLine.Length == 3)
-                {
-                    array[i, 0] = currentLine[0].Trim();
-                    array[i, 1] = currentLine[1].Trim();
-                    array[i, 2] = currentLine[2].Trim();
-                }
-                else if (currentLine.Length == 2)
-                {
-                    array[i, 0] = currentLine[0].Trim();
-                    array[i, 1] = "N/A";
-                    array[i, 2] = currentLine[1].Trim();
-                }
-                else
-                {
-                    Console.WriteLine("The specified file does not have the expected number of values per line.");
-                }
+                StreamReader fileReader = new StreamReader(fileName);
 
-                i++;
+                while ((line = fileReader.ReadLine()) != null)
+                {
+                    string[] currentLine = line.Split('|');
+                    if (currentLine.Length == 3)
+                    {
+                        array[i, 0] = currentLine[0].Trim();
+                        array[i, 1] = currentLine[1].Trim();
+                        array[i, 2] = currentLine[2].Trim();
+                    }
+                    else if (currentLine.Length == 2)
+                    {
+                        array[i, 0] = currentLine[0].Trim();
+                        array[i, 1] = "N/A";
+                        array[i, 2] = currentLine[1].Trim();
+                    }
+                    else
+                    {
+                        Console.WriteLine("The specified file does not contain the expected number of values per line.");
+                    }
+
+                    i++;
+                }
+                fileReader.Close();
             }
-            fileReader.Close();
+            catch (IOException e)
+            {
+                Console.WriteLine("An error occurred while attempting to process the specified file.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
             return array;
         }
 
         private static int CountFileLines(string fileName)
         {
-            StreamReader fileReader = new StreamReader(fileName);
             int lineCount = 0;
 
-            while (fileReader.ReadLine() != null)
+            try
             {
-                lineCount++;
+                StreamReader fileReader = new StreamReader(fileName);
+
+                while (fileReader.ReadLine() != null)
+                {
+                    lineCount++;
+                }
+
+                fileReader.Close();
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("An error occurred while attempting to process the specified file.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
 
-            fileReader.Close();
             return lineCount;
         }
 
@@ -93,42 +118,57 @@ namespace HW9
         private static string NewFile(string[,] array)
         {
             string fileName = "newInventory.txt";
-            StreamWriter s = new StreamWriter(fileName);
 
-            for (int i = 0; i < array.GetLength(0); i++)
+            try
             {
-                s.WriteLine($"{array[i, 0]} | " +
-                    $"{array[i, 1]} | {array[i, 2]}");
+                StreamWriter s = new StreamWriter(fileName);
+
+                for (int i = 0; i < array.GetLength(0); i++)
+                {
+                    s.WriteLine($"{array[i, 0]} | " +
+                        $"{array[i, 1]} | {array[i, 2]}");
+                }
+
+                s.Close();
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("An error occurred while attempting to process the specified file.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
 
-            s.Close();
             return fileName;
         }
 
         private static void DisplayFileContents(string heading, string fileName)
         {
-            StreamReader fileReader = new StreamReader(fileName);
             string line;
 
-            Console.WriteLine(heading);
-
-            while ((line = fileReader.ReadLine()) != null)
+            try
             {
-                Console.WriteLine(line);
+                StreamReader fileReader = new StreamReader(fileName);
+
+                Console.WriteLine(heading);
+
+                while ((line = fileReader.ReadLine()) != null)
+                {
+                    Console.WriteLine(line);
+                }
+
+                fileReader.Close();
+                Console.WriteLine();
             }
-
-            fileReader.Close();
-            Console.WriteLine();
-        }
-
-        private static void DisplayArrayContents(string[,] array)
-        {
-            for (int i = 0; i < array.GetLength(0); i++)
+            catch (IOException e)
             {
-                Console.WriteLine($"{array[i, 0]} | " +
-                    $"{array[i, 1]} | {array[i, 2]}");
+                Console.WriteLine("An error occurred while attempting to process the specified file.");
             }
-
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

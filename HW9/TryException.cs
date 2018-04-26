@@ -8,10 +8,11 @@ using System;
 public class TryException{
   public void TryExceptionTest(String[] args) 
   {
+    int[] anArray = { 5, 6, 7 };
     int value;
+
     try 
     {
-      int[] anArray = {5,6,7};
       int index = int.Parse(args[0]);
       value = anArray[index];
       Console.WriteLine
@@ -25,9 +26,8 @@ public class TryException{
             Console.WriteLine("Stick with 0, 1, or 2");
             Console.Write("Enter an index number: ");
             value = int.Parse(Console.ReadLine());
-        } while (value < 0 || value > 2);
+        } while (value < 0 || value > anArray.Length-1);
     }
     Console.WriteLine("This is the end of the program");
-    Console.ReadLine();
   }
 }
