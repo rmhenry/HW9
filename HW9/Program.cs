@@ -70,6 +70,7 @@ namespace HW9
 
             TryException test = new TryException();
             test.TryExceptionTest(arguments);
+
             ReturnToMainMenu();
         }
 
@@ -79,6 +80,7 @@ namespace HW9
 
             Console.WriteLine("Enter a file name and a text string to search for.");
             Console.WriteLine("Type the file name first, add a space, then type the text string.");
+            Console.WriteLine();
             Console.Write("Sample input: ");
 
             string[] arguments = Console.ReadLine().Split(new char[] { ' ' });
