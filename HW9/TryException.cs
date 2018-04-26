@@ -21,6 +21,7 @@ public class TryException{
 
     catch (IndexOutOfRangeException e) 
     {
+        // prompt user until a valid value is entered
         do
         {
             Console.WriteLine("Stick with 0, 1, or 2");
