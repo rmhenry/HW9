@@ -83,7 +83,6 @@ namespace HW9
             Console.WriteLine();
             Console.Write("Sample input: ");
 
-            // separate file name and search text into two strings
             string[] arguments = Console.ReadLine().Split(new char[] { ' ' });
             string fileName = arguments[0];
             string searchText = arguments[1];

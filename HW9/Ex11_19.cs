@@ -13,11 +13,8 @@ namespace HW9
         {
             Console.Clear();
 
-            // copy the contents of each file to a 2D array
             string[,] updateFileArray = FileToArray(updateFileName);
             string[,] inventoryFileArray = FileToArray(inventoryFileName);
-
-            // adjust the inventory array based on the quantities in the update array
             UpdateInventoryArray(inventoryFileArray, updateFileArray);
 
             string newFileName = NewFile(inventoryFileArray);
@@ -30,7 +27,7 @@ namespace HW9
         private static string[,] FileToArray(string fileName)
         {
             int lineCount = CountFileLines(fileName);
-            int i = 0;  // counter for 2D array row
+            int i = 0;
             string[,] array = new string[lineCount, 3];
             string line;
 
@@ -42,19 +39,15 @@ namespace HW9
                 {
                     string[] currentLine = line.Split('|');
                     if (currentLine.Length == 3)
-                    // each line in the inventory file is in this format:
-                    // item number | item description | quantity
                     {
                         array[i, 0] = currentLine[0].Trim();
                         array[i, 1] = currentLine[1].Trim();
                         array[i, 2] = currentLine[2].Trim();
                     }
                     else if (currentLine.Length == 2)
-                    // each line in the inventory file is in this format:
-                    // item number | quantity
                     {
                         array[i, 0] = currentLine[0].Trim();
-                        array[i, 1] = "N/A";    // placeholder for absent item description
+                        array[i, 1] = "N/A";
                         array[i, 2] = currentLine[1].Trim();
                     }
                     else
@@ -112,8 +105,6 @@ namespace HW9
                 for (int j = 0; j < inventoryArray.GetLength(0); j++)
                 {
                     if (inventoryArray[j, 0] == updateArray[i, 0])
-                    // the item number in the inventory array 
-                    // matches the item number in the updating array
                     {
                         int originalQuantity = int.Parse(inventoryArray[j, 2]);
                         int quantityChange = int.Parse(updateArray[i, 2]);

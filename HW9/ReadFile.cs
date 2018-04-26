@@ -16,11 +16,9 @@ namespace HW9
             int count = 0;    // number of lines read so far 
             totalLines = int.Parse(args[1]);
             StreamReader f = new StreamReader(args[0]);
-
             while ((line = f.ReadLine()) != null
                    && count++ < totalLines)
                 Console.WriteLine(line);
-
             f.Close();
         }
 
